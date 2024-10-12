@@ -3,13 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { Producto } from '../../models/producto';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastrModule, ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-crear-producto',
   standalone: true,
-  imports: [RouterLink, ReactiveFormsModule, CommonModule,BrowserAnimationsModule, ToastrModule],
+  imports: [RouterLink, ReactiveFormsModule, CommonModule],
   templateUrl: './crear-producto.component.html',
   styleUrl: './crear-producto.component.css'
 })
@@ -19,8 +17,7 @@ export class CrearProductoComponent implements OnInit {
   productoForm: FormGroup;
 
   constructor(private fb: FormBuilder,
-    private router:Router,
-    private toastr: ToastrService
+    private router:Router
   ) {
     this.productoForm = this.fb.group({
       producto: ['', Validators.required],
@@ -44,7 +41,6 @@ export class CrearProductoComponent implements OnInit {
     }
 
     console.log(PRODUCTO);
-    this.toastr.success('Producto registrado correctamente!', 'Producto registrado!');
     this.router.navigate(['/']);
   }
 
