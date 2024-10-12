@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-listar-producto',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './listar-producto.component.html',
   styleUrl: './listar-producto.component.css'
 })
