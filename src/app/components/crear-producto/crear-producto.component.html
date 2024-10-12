@@ -7,19 +7,35 @@
           <form class="mt-3" [formGroup]="productoForm" (ngSubmit)="agregarProducto()">
             <div class="mb-3">
               <input type="text" formControlName="producto" class="form-control form-control-lg" placeholder="producto">
+              <div class="text-danger"
+                *ngIf="this.productoForm.get('producto')?.hasError('required') && this.productoForm.get('producto')?.touched">
+                <span>El nombre del producto <strong>es obligatorio</strong></span>
+              </div>
             </div>
             <div class="mb-3">
               <input type="text" formControlName="categoria" class="form-control form-control-lg" placeholder="Categoria">
+              <div class="text-danger"
+                *ngIf="this.productoForm.get('categoria')?.hasError('required') && this.productoForm.get('categoria')?.touched">
+                <span>La categoria del producto <strong>es obligatoria</strong></span>
+              </div>
             </div>
             <div class="mb-3">
               <input type="text" formControlName="ubicacion" class="form-control form-control-lg" placeholder="Ubicacion">
+              <div class="text-danger"
+                *ngIf="this.productoForm.get('ubicacion')?.hasError('required') && this.productoForm.get('ubicacion')?.touched">
+                <span>La ubicacion del producto <strong>es obligatoria</strong></span>
+              </div>
             </div>
             <div class="mb-3">
               <input type="text" formControlName="precio" class="form-control form-control-lg" placeholder="Precio">
+              <div class="text-danger"
+                *ngIf="this.productoForm.get('precio')?.hasError('required') && this.productoForm.get('precio')?.touched">
+                <span>El precio del producto <strong>es obligatorio</strong></span>
+              </div>
             </div>
             <div class="mb-3">
               <button routerLink="/" class="btn btn-secondary btn-lg btn-block float-lg-start">VOLVER</button>
-              <button type="submit" class="btn btn-success btn-lg btn-block float-end">ACEPTAR</button>
+              <button type="submit" [disabled]="this.productoForm.invalid" class="btn btn-success btn-lg btn-block float-end">ACEPTAR</button>
             </div>
           </form>
         </div>
