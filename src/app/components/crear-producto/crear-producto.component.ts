@@ -3,33 +3,32 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { Producto } from '../../models/producto';
+import { ToastrService } from 'ngx-toastr'; // Importa el servicio Toastr
 
 @Component({
   selector: 'app-crear-producto',
   standalone: true,
   imports: [RouterLink, ReactiveFormsModule, CommonModule],
   templateUrl: './crear-producto.component.html',
-  styleUrl: './crear-producto.component.css'
+  styleUrls: ['./crear-producto.component.css'] // Asegúrate de usar "styleUrls" en plural
 })
 export class CrearProductoComponent implements OnInit {
-
 
   productoForm: FormGroup;
 
   constructor(private fb: FormBuilder,
-    private router:Router
+              private router: Router,
+              private toastr: ToastrService // Añade el servicio Toastr aquí
   ) {
     this.productoForm = this.fb.group({
       producto: ['', Validators.required],
       categoria: ['', Validators.required],
       ubicacion: ['', Validators.required],
       precio: ['', Validators.required],
-    })
+    });
   }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   agregarProducto() {
     console.log(this.productoForm.value);
@@ -38,9 +37,14 @@ export class CrearProductoComponent implements OnInit {
       categoria: this.productoForm.get('categoria')?.value,
       ubicacion: this.productoForm.get('ubicacion')?.value,
       precio: this.productoForm.get('precio')?.value
-    }
+    };
 
     console.log(PRODUCTO);
+
+    // Muestra el mensaje de éxito con Toastr
+    this.toastr.success('Producto registrado correctamente!', 'Éxito');
+
+    // Redirige a la raíz
     this.router.navigate(['/']);
   }
 
